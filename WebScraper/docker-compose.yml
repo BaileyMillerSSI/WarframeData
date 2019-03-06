@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webscraper:
+    image: ${DOCKER_REGISTRY-}webscraper
+    build:
+      context: .
+      dockerfile: WebScraper/Dockerfile
