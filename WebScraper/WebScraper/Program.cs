@@ -14,11 +14,11 @@ namespace WebScraper
 
         static HttpClient _Web = new HttpClient();
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             Console.WriteLine("Preparing to download Primary Weapon Data from Warframe Wiki");
 
-            LoggingService.PrepareLoggingService();
+            LoggingService.PrepareLoggingService().Wait();
 
             var data = GetWeaponListAsync().Result;
             
@@ -30,8 +30,8 @@ namespace WebScraper
                 Console.WriteLine($"Credits: {wep.CreditSellPrice}");
             }
 
-
-            Console.ReadKey();
+            LoggingService.LogEventAsync("Ready to exit").Wait();
+            return 0;
         }
 
 
@@ -59,7 +59,7 @@ namespace WebScraper
             {
                 try
                 {
-                    LoggingService.LogEvent($"Loading {wep.Title} into local cache");
+                    LoggingService.LogEventAsync($"Loading {wep.Title} into local cache").Wait();
                     wep.LoadDataAsync(_Web).Wait();
                 }
                 catch (Exception)

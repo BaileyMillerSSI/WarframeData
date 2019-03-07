@@ -97,7 +97,7 @@ namespace WebScraper
 
 
             // Finish Up
-            LoggingService.LogEvent($"Finished Loading {Title} into local cache");
+            await LoggingService.LogEventAsync($"Finished Loading {Title} into local cache");
         }
     }
 }

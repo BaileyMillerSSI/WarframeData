@@ -57,7 +57,7 @@ namespace ApiServer
             app.UseCookiePolicy();
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ChatHub>("/chatHub");
+                routes.MapHub<LogHub>("/logHub");
             });
             app.UseMvc();
         }

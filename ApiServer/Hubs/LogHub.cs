@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiServer.Hubs
 {
-    public class ChatHub : Hub
+    public class LogHub : Hub
     {
         public async Task LogEventBroadcast(string message)
         {
