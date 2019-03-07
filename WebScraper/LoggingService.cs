@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Warframe.Data;
 
 namespace WebScraper
 {
@@ -49,16 +50,6 @@ namespace WebScraper
             //}
             conCurLog.TryAdd(DateTime.Now, message);
         }
-
-        public static async Task LogItemLoadedAsync(WeaponData data, string message)
-        {
-            if (connection.State == HubConnectionState.Connected)
-            {
-                await connection.InvokeAsync("ItemDataLoaded",data);
-            }
-
-            await LogEventAsync(message);
-        }
         
         /// <summary>
         /// Will setup a socket connection to the server to broadcast events inside the execution of the code
@@ -70,7 +61,7 @@ namespace WebScraper
                 await Task.Delay(TimeSpan.FromSeconds(5));
                 await connection.StartAsync();
             }
-            catch (Exception error)
+            catch (Exception)
             {
                 
             }

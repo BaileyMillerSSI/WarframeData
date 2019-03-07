@@ -6,6 +6,11 @@
 
 <div class="container">
     <div class="row">
+        <button class="btn btn-lg" id="loadDbItems">Load from Database</button>
+        <br />
+        <button class="btn btn-lg btn-danger" id="clearAll" disabled>Clear All</button>
+    </div>
+    <div class="row">
         <div class="col-6 scroll-list" id="messages">
             <ul id="messagesList"></ul>
         </div>
@@ -16,6 +21,7 @@
 </div>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/logEvents.js"></script>
+<script src="~/js/weapondb.js"></script>
 <style>
     .scroll-list {
         height: 500px;

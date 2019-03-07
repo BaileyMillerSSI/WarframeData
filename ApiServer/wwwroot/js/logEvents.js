@@ -10,13 +10,25 @@ connection.on("LogEvent", function (message) {
     document.getElementById("messagesList").appendChild(li);
 
     li.scrollIntoView();
+
+    var btn = document.getElementById("clearAll");
+    btn.disabled = false;
 });
 
 connection.on("ItemLoaded", function (item) {
+    AppendItem(item);
+});
 
+connection.start().then(function () {
+    
+}).catch(function (err) {
+    return console.error(err.toString());
+    });
+
+
+function AppendItem (item) {
     var link = document.createElement("a");
     link.href = item.wikiLink;
-
 
     var div = document.createElement("div");
     var title = document.createElement("p");
@@ -32,10 +44,29 @@ connection.on("ItemLoaded", function (item) {
     document.getElementById("itemList").appendChild(link);
 
     div.scrollIntoView();
-});
 
-connection.start().then(function () {
-    
-}).catch(function (err) {
-    return console.error(err.toString());
-});
+    var btn = document.getElementById("clearAll");
+    btn.disabled = false;
+}
+
+function ClearItems() {
+    var container = document.getElementById("itemList");
+
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    var btn = document.getElementById("clearAll");
+    btn.disabled = true;
+}
+
+function ClearLogs() {
+    var container = document.getElementById("messagesList");
+
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    var btn = document.getElementById("clearAll");
+    btn.disabled = true;
+}

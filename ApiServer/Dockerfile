@@ -2,16 +2,18 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
 
+RUN ls
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ../ApiServer/ApiServer.csproj ../ApiServer/
-RUN dotnet restore ../ApiServer/ApiServer.csproj
+COPY ["ApiServer/ApiServer.csproj", "ApiServer/"]
+COPY ["SharedLibs/SharedLibs.csproj", "SharedLibs/"]
+RUN dotnet restore "ApiServer/ApiServer.csproj"
 COPY . .
-WORKDIR /src/../ApiServer
-RUN dotnet build ApiServer.csproj -c Release -o /app
+WORKDIR "/src/ApiServer"
+RUN dotnet build "ApiServer.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish ApiServer.csproj -c Release -o /app
+RUN dotnet publish "ApiServer.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app

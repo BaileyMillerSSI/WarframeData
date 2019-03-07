@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Warframe.Data;
 
 namespace WebScraper
 {
@@ -60,7 +61,7 @@ namespace WebScraper
                 try
                 {
                     LoggingService.LogEventAsync($"Loading {wep.Title} into local cache").Wait();
-                    wep.LoadDataAsync(_Web).Wait();
+                    wep.LoadDataAsync().Wait();
                 }
                 catch (Exception)
                 {

@@ -4,14 +4,14 @@ services:
   apiserver:
     image: ${DOCKER_REGISTRY-}apiserver
     build:
-      context: ../ApiServer/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./ApiServer/Dockerfile
 
   webscraper:
     image: ${DOCKER_REGISTRY-}webscraper
     build:
-      context: ../WebScraper
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./WebScraper/Dockerfile
     depends_on:
       - apiserver
 
