@@ -9,6 +9,7 @@ using ApiServer.Contexts;
 using Warframe.Data;
 using Microsoft.AspNetCore.SignalR;
 using ApiServer.Hubs;
+using ApiServer.Helpers;
 
 namespace ApiServer.Controllers
 {

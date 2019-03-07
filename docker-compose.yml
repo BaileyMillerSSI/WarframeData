@@ -6,14 +6,5 @@ services:
     build:
       context: ./
       dockerfile: ./ApiServer/Dockerfile
-
-  webscraper:
-    image: ${DOCKER_REGISTRY-}webscraper
-    build:
-      context: ./
-      dockerfile: ./WebScraper/Dockerfile
-    depends_on:
-      - apiserver
-
-  
-
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
