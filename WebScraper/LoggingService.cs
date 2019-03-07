@@ -17,7 +17,7 @@ namespace WebScraper
         static LoggingService()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl("http://apiserver:59930/LogHub")
+                .WithUrl("http://apiserver/LogHub")
                 .Build();
         }
 
@@ -50,7 +50,16 @@ namespace WebScraper
             conCurLog.TryAdd(DateTime.Now, message);
         }
 
+        public static async Task LogItemLoadedAsync(WeaponData data, string message)
+        {
+            if (connection.State == HubConnectionState.Connected)
+            {
+                await connection.InvokeAsync("ItemDataLoaded",data);
+            }
 
+            await LogEventAsync(message);
+        }
+        
         /// <summary>
         /// Will setup a socket connection to the server to broadcast events inside the execution of the code
         /// </summary>
@@ -58,11 +67,6 @@ namespace WebScraper
         {
             try
             {
-                using (var webby = new HttpClient())
-                {
-                    var data = await webby.GetAsync("https://apiserver:44334/css/site.css");
-                }
-
                 await Task.Delay(TimeSpan.FromSeconds(5));
                 await connection.StartAsync();
             }

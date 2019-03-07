@@ -12,5 +12,10 @@ namespace ApiServer.Hubs
         {
             await Clients.Others.SendAsync("LogEvent", message);
         }
+
+        public async Task ItemDataLoaded(object data)
+        {
+            await Clients.Others.SendAsync("ItemLoaded", data);
+        }
     }
 }

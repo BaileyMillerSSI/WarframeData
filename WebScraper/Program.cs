@@ -14,7 +14,7 @@ namespace WebScraper
 
         static HttpClient _Web = new HttpClient();
 
-        static int Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Preparing to download Primary Weapon Data from Warframe Wiki");
 
@@ -31,7 +31,7 @@ namespace WebScraper
             }
 
             LoggingService.LogEventAsync("Ready to exit").Wait();
-            return 0;
+            Environment.Exit(0);
         }
 
 

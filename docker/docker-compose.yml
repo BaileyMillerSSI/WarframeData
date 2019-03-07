@@ -1,18 +1,17 @@
 version: '3.4'
 
 services:
-
   apiserver:
     image: ${DOCKER_REGISTRY-}apiserver
     build:
-      context: .
-      dockerfile: ../ApiServer/Dockerfile
+      context: ../ApiServer/
+      dockerfile: Dockerfile
 
   webscraper:
     image: ${DOCKER_REGISTRY-}webscraper
     build:
-      context: .
-      dockerfile: WebScraper/Dockerfile
+      context: ../WebScraper
+      dockerfile: Dockerfile
     depends_on:
       - apiserver
 
